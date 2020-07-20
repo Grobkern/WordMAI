@@ -25,8 +25,7 @@ HEADERS += \
     PTextEdit.h \
     algorithmwindow.h \
     constants.h \
-    mainwindow.h \
-    stylesheets.h
+    mainwindow.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
