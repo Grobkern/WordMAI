@@ -6,7 +6,7 @@
 
 PTextEdit::PTextEdit(QWidget *parent) {
     fileLines = new QVector<QString>;
-    setMouseTracking(true);
+    //setMouseTracking(true);
 }
 void PTextEdit::saveFile() {
     QString text = toHtml();

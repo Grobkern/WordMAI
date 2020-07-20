@@ -27,10 +27,11 @@ private:
     QVector<QString> *fileText;
     QHBoxLayout *layout;
     QPushButton *pushButton;
-    PTextEdit *textEdit;
+    QTextEdit *textEdit;
     QLabel *TextLabel;
-    QFileSystemModel *model;
+    QDirModel *model;
     QTreeView *view;
+    QString oFileName;
 
     void setupLayout();
     void readTextFromFile(QString filename);

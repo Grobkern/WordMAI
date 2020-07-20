@@ -16,14 +16,14 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    model = new QFileSystemModel();
+    model = new QDirModel();
     QStringList filters;
     filters.append("*.lect");
     filters.append("*.txt");
     view = new QTreeView();
-    model->setRootPath(QDir::currentPath());
     model->setNameFilters(filters);
     view->setModel(model);
+    view->setRootIndex(model->index(QDir::currentPath()));
     view->hideColumn(1);
     view->hideColumn(2);
     view->setColumnWidth(0, 200);
@@ -43,6 +43,7 @@ MainWindow::~MainWindow(){ delete pushButton;  };
 
 void MainWindow::TreeViewDoubleClick(const QModelIndex& index) {
     auto path = model->filePath(index);
+    this->oFileName = path;
     readTextFromFile(path);
 }
 //Функция переносящая toolbar в левую часть, потому что я решил что так солиднее, но возможно это бред
@@ -59,6 +60,7 @@ QToolBar *MainWindow::createToolbar() {
     //Создание объекта класса toolbar, переменная объявлена в mainwindow.h(this надо убирать)
     //Ниже под действиями я обозначаю QAction
     this->toolbar = new QToolBar();
+    this->toolbar->setMovable(false);
     //Весь блок содержащий в себе QAction, т.е с 38 по 48 строчку отвечает за создние *действия* для тулбара, в качестве аргумента передаётся строка в которой указано имя действие(название которое должно показаться) и указатель на текущи объект(снова this)
     const QIcon openIcon = QIcon::fromTheme("document-open", QIcon(":img/Resources/img/010-file.png"));
     const QIcon imgIcon = QIcon::fromTheme("document-open", QIcon(":img/Resources/img/015-arrow.png"));
@@ -110,11 +112,13 @@ QToolBar *MainWindow::createToolbar() {
 void MainWindow::printCheck() {
     QString fileName;
     fileName = QFileDialog::getOpenFileName(this,"", "", "*.txt") ;
+    this->oFileName = fileName;
     this->readTextFromFile(fileName);
 }
 //Функция которая отвечает за возможность редактирования текста(TextEdit, это ниже объявлено//Функция которая отвечает за возможность редактирования текста(TextEdit, это ниже объявлено), название тоже надо поменять
 void MainWindow::liveEdit() {
     qDebug() << "Живовй";
+    qDebug() << this->textEdit->isReadOnly();
     //Проверка можно ли редактировать текст сейчас
     if(this->textEdit->isReadOnly()) {
         qDebug() << "Test";
@@ -130,7 +134,8 @@ void MainWindow::liveEdit() {
 
 void MainWindow::SaveFile()
 {
-    QFile file ("DownloadUsersFile.txt");
+    QFile file (this->oFileName);
+    qDebug() << this->oFileName;
     file.remove();
     if (!file.open(QFile::WriteOnly | QFile::Text | QFile::ReadWrite)){
         QMessageBox::information(this,"Error", "Path not correct!");

@@ -34,6 +34,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    ../Downloads/WordMAI-master/stylesheets.css \
     Resources/img/005-bold.png \
     Resources/img/007-clear format.png \
     Resources/img/010-file.png \

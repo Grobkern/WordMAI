@@ -11,5 +11,9 @@
         <file>Resources/img/007-clear format.png</file>
         <file>Resources/img/005-bold.png</file>
         <file>Resources/img/save-file-option.png</file>
+        <file>Resources/img/icon.ico</file>
+    </qresource>
+    <qresource prefix="/stylesheets">
+        <file>Resources/stylesheets.css</file>
     </qresource>
 </RCC>
