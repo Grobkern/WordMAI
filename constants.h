@@ -7,7 +7,7 @@ const QString HEADER_OPEN = "<h1>";
 const QString HEADER_CLOSE = "</h1>";
 const QString CENTER_OPEN = "<center>";
 const QString CENTER_CLOSE = "</center>";
-const QString IMG_OPEN = "<img scr = ";
+const QString IMG_OPEN = "<img src = ";
 const QString IMG_CLOSE = "</img>";
 const QString PARAGRAPH_OPEN = "<p>";
 const QString PARAGRAPH_CLOSE = "</p>";

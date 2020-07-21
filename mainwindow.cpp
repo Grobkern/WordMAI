@@ -36,7 +36,6 @@ MainWindow::MainWindow(QWidget *parent)
     setupLayout();
     //Массив(динамический(не имеет чётких границ, т.е размерность меняется по ходу выполнения программы)) название которого надо поменять, но для этого надо найти все его использования, он нужен для хранения строк при чтении из файла
     fileText = new QVector<QString>();
-
 }
 //Деструктор, тоже надо написать
 MainWindow::~MainWindow(){ delete pushButton;  };
@@ -89,7 +88,6 @@ QToolBar *MainWindow::createToolbar() {
     connect(setTextAction, SIGNAL(triggered()), SLOT(placeText()));
     connect(makeHeader, SIGNAL(triggered()), SLOT(placeHeader()));
     connect(normalizeText, SIGNAL(triggered()), SLOT(normalizeText()));
-    connect(liveEditMode, SIGNAL(triggered()), SLOT(liveEdit()));
     connect(cursiveText, SIGNAL(triggered()), SLOT(placeCurs()));
     connect(boldText, SIGNAL(triggered()), SLOT(placeBold()));
     connect(strikeText, SIGNAL(triggered()), SLOT(placeStrike()));
@@ -189,7 +187,7 @@ void MainWindow::placeImage() {
     QString imageSrc;
     QString htmlImage;
     //Создаётся диалоговое окно с выбором файла(только png(тоже надо переделать)), дальше когда пользователь выбирает картинку программа получает полный путь до неё
-    imageSrc = QFileDialog::getOpenFileName(this, "Fuck", "", "*.png");
+    imageSrc = QFileDialog::getOpenFileName(this, "", "", "*.png");
     //Ну это я решил удариться в правильно написание и строки в отдельную переменную по хорошему так везде надо сделать, здсь через html теги добавляется картинки
     if(!imageSrc.isEmpty()) {
         htmlImage = this->textEdit->toHtml() + PARAGRAPH_OPEN + PARAGRAPH_CLOSE + CENTER_OPEN +  IMG_OPEN + imageSrc + TAG_CLOSE + IMG_CLOSE + CENTER_CLOSE;
